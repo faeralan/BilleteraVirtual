@@ -7,6 +7,7 @@ namespace BilleteraVirtual
 {
     class Movimiento
     {
+        public int MovimientoId { get; set; }
         public int Importe { get; set; }
 
         public String Descripcion { get; set; }

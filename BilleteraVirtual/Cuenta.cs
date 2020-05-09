@@ -8,8 +8,9 @@ namespace BilleteraVirtual
 {
     class Cuenta
     {
+        public int CuentaId { get; set; }
         public double Saldo { get; set; }
 
-        public List<Movimiento> Movimiento { get; set; }hola;
+        public List<Movimiento> Movimiento { get; set; }
     }
 }
