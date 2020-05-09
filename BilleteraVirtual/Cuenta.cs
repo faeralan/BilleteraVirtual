@@ -10,6 +10,6 @@ namespace BilleteraVirtual
     {
         public double Saldo { get; set; }
 
-        public List<Movimiento> Movimiento { get; set; }
+        public List<Movimiento> Movimiento { get; set; }hola;
     }
 }
