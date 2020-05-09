@@ -21,7 +21,7 @@ namespace BilleteraVirtual
             micuenta.Saldo = 0;
             micuenta.Movimiento = new List<Movimiento>();
 
-            u.cuenta = micuenta;
+            u.Cuenta = micuenta;
 
             Movimiento m = new Movimiento();
 
