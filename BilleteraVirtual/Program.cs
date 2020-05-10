@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BilleteraVirtual
 {
-    class Program
+    class Programc
     {
         static void Main(string[] args)
         {

@@ -11,9 +11,9 @@ namespace BilleteraVirtual
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cuenta> Cuentas { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer(@"Server=LAPTOP-A4STKEUJ\SQLEXPRESS;Database=BilleteraVirtual;Trusted_Connection=True;");
+            //Server = tcp:.; User ID = sa; Password = BilleteraVirtual2020!; Connect Timeout = 5; Integrated Security = false;
         }
     }
 }
