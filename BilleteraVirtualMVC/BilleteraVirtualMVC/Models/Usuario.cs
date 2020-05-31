@@ -12,9 +12,13 @@ namespace BilleteraVirtualMVC.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UsuarioId { get; set; }
+        [Required]
         public String Nombre { get; set; }
+        [Required]
         public String Apellido { get; set; }
+        [Required]
         public String Email { get; set; }
+        [Required]
         public String Password { get; set; }
 
         //[Display(Name = "Fecha inscripción")]
