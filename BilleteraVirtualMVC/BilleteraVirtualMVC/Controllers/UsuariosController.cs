@@ -58,6 +58,9 @@ namespace BilleteraVirtualMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                Cuenta cuenta = new Cuenta();
+                cuenta.Saldo = 0;
+                usuario.Cuenta = cuenta;
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
