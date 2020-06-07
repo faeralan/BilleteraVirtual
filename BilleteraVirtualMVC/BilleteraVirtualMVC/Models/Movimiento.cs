@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Html;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,9 +17,18 @@ namespace BilleteraVirtualMVC.Models
 
         public String Descripcion { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd MM yyyy HH:mm:ss}")]
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
 
         [EnumDataType(typeof(TipoMovimiento))]
         public TipoMovimiento TipoMovimiento { get; set; }
+
+        //Pasar CuentaID en Vista/Controller
+        //Actualizar Saldo en Cuenta
+        //Realizar validaciones (fecha no puede ser mayor a la actual, saldo)
     }
+
+    
 }

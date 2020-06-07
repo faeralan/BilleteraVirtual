@@ -10,22 +10,22 @@ using BilleteraVirtualMVC.Models;
 
 namespace BilleteraVirtualMVC.Controllers
 {
-    public class MovimientoesController : Controller
+    public class MovimientosController : Controller
     {
         private readonly BilleteraContext _context;
 
-        public MovimientoesController(BilleteraContext context)
+        public MovimientosController(BilleteraContext context)
         {
             _context = context;
         }
 
-        // GET: Movimientoes
+        // GET: Movimientos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Movimientos.ToListAsync());
         }
 
-        // GET: Movimientoes/Details/5
+        // GET: Movimientos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace BilleteraVirtualMVC.Controllers
             return View(movimiento);
         }
 
-        // GET: Movimientoes/Create
+        // GET: Movimientos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movimientoes/Create
+        // POST: Movimientos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace BilleteraVirtualMVC.Controllers
             return View(movimiento);
         }
 
-        // GET: Movimientoes/Edit/5
+        // GET: Movimientos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace BilleteraVirtualMVC.Controllers
             return View(movimiento);
         }
 
-        // POST: Movimientoes/Edit/5
+        // POST: Movimientos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace BilleteraVirtualMVC.Controllers
             return View(movimiento);
         }
 
-        // GET: Movimientoes/Delete/5
+        // GET: Movimientos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace BilleteraVirtualMVC.Controllers
             return View(movimiento);
         }
 
-        // POST: Movimientoes/Delete/5
+        // POST: Movimientos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

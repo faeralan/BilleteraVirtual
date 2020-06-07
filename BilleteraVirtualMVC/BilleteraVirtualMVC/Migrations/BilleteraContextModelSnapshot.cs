@@ -41,7 +41,7 @@ namespace BilleteraVirtualMVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CuentaId")
+                    b.Property<int?>("CuentaId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
@@ -58,7 +58,7 @@ namespace BilleteraVirtualMVC.Migrations
 
                     b.HasKey("MovimientoId");
 
-                    b.HasIndex("CuentaId");
+                    b.HasIndex("CuentaId1");
 
                     b.ToTable("Movimientos");
                 });
@@ -74,7 +74,7 @@ namespace BilleteraVirtualMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CuentaId")
+                    b.Property<int?>("CuentaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -98,18 +98,16 @@ namespace BilleteraVirtualMVC.Migrations
 
             modelBuilder.Entity("BilleteraVirtualMVC.Models.Movimiento", b =>
                 {
-                    b.HasOne("BilleteraVirtualMVC.Models.Cuenta", null)
+                    b.HasOne("BilleteraVirtualMVC.Models.Cuenta", "CuentaId")
                         .WithMany("Movimiento")
-                        .HasForeignKey("CuentaId");
+                        .HasForeignKey("CuentaId1");
                 });
 
             modelBuilder.Entity("BilleteraVirtualMVC.Models.Usuario", b =>
                 {
                     b.HasOne("BilleteraVirtualMVC.Models.Cuenta", "Cuenta")
                         .WithMany()
-                        .HasForeignKey("CuentaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CuentaId");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,7 +21,6 @@ namespace BilleteraVirtualMVC.Models
         [Required]
         public String Password { get; set; }
 
-        //[Display(Name = "Fecha inscripción")]
         public Cuenta Cuenta { get; set; }
     }
 
