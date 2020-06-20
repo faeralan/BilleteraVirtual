@@ -93,7 +93,6 @@ namespace BilleteraVirtualMVC.Controllers
                     }
                 }
 
-
                 if (esValido)
                 {
                     _context.Add(movimiento);
