@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
+using System.Net.WebSockets;
 
 namespace BilleteraVirtualMVC.Controllers
 {
@@ -54,16 +55,62 @@ namespace BilleteraVirtualMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovimientoId,Importe,Descripcion,Fecha,TipoMovimiento")] Movimiento movimiento)
+        public async Task<IActionResult> Create([Bind("MovimientoId,Importe,Descripcion,TipoMovimiento")] Movimiento movimiento)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movimiento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //llamar funcion que valide (pasando el id del usuario o el id de cuenta) para obtener el saldo
+                //Objeto SESSION ASP.net
+                //Hacer un if con las validaciones que necesitemos
+                //Db set para hacer las validaciones y posteriormente para actualizar el sueldo en cuentas
+                /*Si hay error: Redirigo a una nueva view con error
+                 * return RedirectToAction(nameof(Index));
+                 * */
+                
+                movimiento.Fecha =DateTime.Now;
+                
+                var consulta = _context.Cuentas.Where(s => s.CuentaId == 2);
+                var cuenta = consulta.FirstOrDefault<Cuenta>();
+                var saldo=cuenta.Saldo;
+
+                var esValido = true;
+                //Si existe la cuenta
+                if (movimiento.TipoMovimiento.Equals(TipoMovimiento.Ingreso))
+                {
+                    cuenta.Saldo = saldo + movimiento.Importe;
+                    _context.SaveChanges();
+                }
+                else {
+                    var aux = saldo - movimiento.Importe;
+                    if (aux >= 0)
+                    {
+                        cuenta.Saldo = aux;
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        esValido = false;
+                    }
+                }
+
+
+                if (esValido)
+                {
+                    _context.Add(movimiento);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //Redirigir a error
+                    ModelState.AddModelError("Importe", "El monto ingresado supera el saldo de la cuenta");
+                    return View(movimiento);
+                }
             }
             return View(movimiento);
         }
+
+        
 
         // GET: Movimientos/Edit/5
         public async Task<IActionResult> Edit(int? id)
