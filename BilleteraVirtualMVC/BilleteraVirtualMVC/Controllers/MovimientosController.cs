@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
 using System.Net.WebSockets;
+using Microsoft.AspNetCore.Http;
 
 namespace BilleteraVirtualMVC.Controllers
 {
@@ -23,12 +24,24 @@ namespace BilleteraVirtualMVC.Controllers
         // GET: Movimientos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movimientos.ToListAsync());
+            var micuenta = HttpContext.Session.GetInt32("CuentaID");
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
+            var movs = from m in _context.Movimientos where m.CuentaId == micuenta orderby m.Fecha select m;
+
+            
+
+            return View(movs);
         }
 
         // GET: Movimientos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
+
             if (id == null)
             {
                 return NotFound();
@@ -69,21 +82,27 @@ namespace BilleteraVirtualMVC.Controllers
                 
                 movimiento.Fecha =DateTime.Now;
                 
-                var consulta = _context.Cuentas.Where(s => s.CuentaId == 2);
+                var consulta = _context.Cuentas.Where(s => s.CuentaId == HttpContext.Session.GetInt32("CuentaID"));
                 var cuenta = consulta.FirstOrDefault<Cuenta>();
                 var saldo=cuenta.Saldo;
+                var micuenta = cuenta.CuentaId;
+
+                movimiento.CuentaId = micuenta;
 
                 var esValido = true;
                 //Si existe la cuenta
                 if (movimiento.TipoMovimiento.Equals(TipoMovimiento.Ingreso))
                 {
-                    cuenta.Saldo = saldo + movimiento.Importe;
+                    var aux = saldo + movimiento.Importe;
+                    cuenta.Saldo = aux;
                     _context.SaveChanges();
+                    HttpContext.Session.SetString("Saldo", aux.ToString());
                 }
                 else {
                     var aux = saldo - movimiento.Importe;
                     if (aux >= 0)
                     {
+                        HttpContext.Session.SetString("Saldo", aux.ToString());
                         cuenta.Saldo = aux;
                         _context.SaveChanges();
                     }

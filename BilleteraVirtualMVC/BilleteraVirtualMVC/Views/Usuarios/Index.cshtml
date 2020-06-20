@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BilleteraVirtualMVC.Models.Usuario>
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Index";
 }
 
@@ -44,8 +45,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UsuarioId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UsuarioId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UsuarioId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.UsuarioId">Details</a>
             </td>
         </tr>
 }

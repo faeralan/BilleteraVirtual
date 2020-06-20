@@ -30,34 +30,52 @@ namespace BilleteraVirtualMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(Usuario user)
         {
-            if (ModelState.IsValid)
-            {
+           
                 using (_context)
                 {
                     var obj = _context.Usuarios.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
                     {
+                        var cons = from us in _context.Usuarios where us.UsuarioId == obj.UsuarioId select us.Cuenta;
+                        var micuenta= cons.FirstOrDefault<Cuenta>();
 
                         HttpContext.Session.SetString("UserID", obj.UsuarioId.ToString());
-                        HttpContext.Session.SetString("CuentaID", obj.Cuenta.CuentaId.ToString());
+                        HttpContext.Session.SetInt32("CuentaID", micuenta.CuentaId);
                         HttpContext.Session.SetString("Nombre", obj.Nombre.ToString());
+                        HttpContext.Session.SetString("Saldo", micuenta.Saldo.ToString());
+
                         return RedirectToAction("UserDashBoard");
                     }
                 }
-            }
-            return RedirectToAction("Login");
+
+            return View("~/Views/Login.cshtml");
         }
 
         public IActionResult UserDashBoard()
         {
             if (HttpContext.Session.GetString("UserID") != null)
             {
+                ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+                ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+                ViewBag.Usuario = HttpContext.Session.GetString("UserID");
                 return View("~/Views/Home/Index.cshtml");
             }
             else
             {
-                return RedirectToAction("Login");
+                return View("~/Views/Login.cshtml");
             }
+        }
+
+        public IActionResult CerrarSesion()
+        {
+
+            
+            HttpContext.Session.SetString("UserID", "");
+            HttpContext.Session.SetInt32("CuentaID", 0);
+            HttpContext.Session.SetString("Nombre", "");
+            HttpContext.Session.SetString("Saldo", "");
+
+            return View("~/Views/Login.cshtml");
         }
     }
 }

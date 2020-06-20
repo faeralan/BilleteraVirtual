@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BilleteraVirtualMVC.Models;
 using BilleteraVirtualMVC.Context;
+using Microsoft.AspNetCore.Http;
 
 
 namespace BilleteraVirtualMVC.Controllers
@@ -19,9 +20,13 @@ namespace BilleteraVirtualMVC.Controllers
         {
             _logger = logger;
         }
-
+        
+        
         public IActionResult Index()
         {
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             return View();
         }
 

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BilleteraVirtualMVC.Models.Movimiento>
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Index";
 }
 
@@ -43,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.TipoMovimiento)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MovimientoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MovimientoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MovimientoId">Delete</a>
+                
+                <a asp-action="Details" asp-route-id="@item.MovimientoId">Details</a>
+                
             </td>
         </tr>
 }

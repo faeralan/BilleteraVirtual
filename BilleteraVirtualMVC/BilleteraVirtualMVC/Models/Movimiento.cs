@@ -25,6 +25,8 @@ namespace BilleteraVirtualMVC.Models
         [EnumDataType(typeof(TipoMovimiento))]
         public TipoMovimiento TipoMovimiento { get; set; }
 
+        public int CuentaId { get; set; }
+
         //Pasar CuentaID en Vista/Controller
         //Actualizar Saldo en Cuenta
         //Realizar validaciones (fecha no puede ser mayor a la actual, saldo)

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
+using Microsoft.AspNetCore.Http;
+
 
 namespace BilleteraVirtualMVC.Controllers
 {
@@ -63,9 +65,9 @@ namespace BilleteraVirtualMVC.Controllers
                 usuario.Cuenta = cuenta;
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("~/Views/Login.cshtml");
             }
-            return View(usuario);
+            return View("~/Views/Login.cshtml");
         }
 
         // GET: Usuarios/Edit/5
@@ -91,10 +93,10 @@ namespace BilleteraVirtualMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Nombre,Apellido,Email,Password")] Usuario usuario)
         {
-            if (id != usuario.UsuarioId)
+            /*if (id != usuario.UsuarioId)
             {
                 return NotFound();
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
@@ -114,7 +116,10 @@ namespace BilleteraVirtualMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+                ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+                ViewBag.Usuario = HttpContext.Session.GetString("UserID");
+                return View("~/Views/Home/Index.cshtml");
             }
             return View(usuario);
         }

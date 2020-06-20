@@ -1,7 +1,12 @@
 ﻿@{
+    
+    Layout = "_Layout";
     ViewData["Title"] = "Billetera Virtual";
+
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bienvenido!</h1>
+    <h1 class="display-4">Bienvenido, @{@ViewBag.Nombre}!</h1>
+    <h5>Saldo disponible: $@{@ViewBag.Saldo}</h5>
+
 </div>

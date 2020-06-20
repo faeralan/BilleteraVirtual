@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace BilleteraVirtualMVC
 {
