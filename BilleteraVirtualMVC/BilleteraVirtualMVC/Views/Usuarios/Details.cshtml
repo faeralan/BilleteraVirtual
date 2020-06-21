@@ -2,14 +2,14 @@
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Mi cuenta";
 }
 
-<h1>Details</h1>
+<h1>Mi cuenta</h1>
 
 <div>
     <h4>Usuario</h4>
-    <hr />
+    <hr />  
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
@@ -38,5 +38,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UsuarioId">Edit</a>
+    <a asp-action="Edit" asp-route-id="@Model.UsuarioId">Editar</a>
 </div>

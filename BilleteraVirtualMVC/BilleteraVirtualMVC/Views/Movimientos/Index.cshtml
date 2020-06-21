@@ -2,13 +2,13 @@
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movimientos";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar movimiento</a>
 </p>
 <table class="table">
     <thead>
@@ -45,7 +45,7 @@
             </td>
             <td>
                 
-                <a asp-action="Details" asp-route-id="@item.MovimientoId">Details</a>
+                <a asp-action="Details" asp-route-id="@item.MovimientoId">Detalles</a>
                 
             </td>
         </tr>
