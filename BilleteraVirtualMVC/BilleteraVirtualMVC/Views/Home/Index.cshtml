@@ -7,6 +7,15 @@
 
 <div class="text-center">
     <h1 class="display-4">Bienvenido, @{@ViewBag.Nombre}!</h1>
-    <h5>Saldo disponible: $@{@ViewBag.Saldo}</h5>
+    
 
+</div>
+
+<div class="card-deck mb-3 text-center">
+    <div class="card col-md-4 box-shadow mx-auto p-0">
+        <div class="card-header">SALDO DISPONIBLE</div>
+        <div class="card-body">
+            <h1 class="card-title pricing-card-title">$@{@ViewBag.Saldo}</h1>
+        </div>
+    </div>
 </div>
