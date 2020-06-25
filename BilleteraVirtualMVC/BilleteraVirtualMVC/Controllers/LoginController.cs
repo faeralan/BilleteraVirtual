@@ -47,7 +47,8 @@ namespace BilleteraVirtualMVC.Controllers
                         return RedirectToAction("UserDashBoard");
                     }
                 }
-
+            
+            ModelState.AddModelError("Password", "Los datos ingresados son invalidos");
             return View("~/Views/Login.cshtml");
         }
 

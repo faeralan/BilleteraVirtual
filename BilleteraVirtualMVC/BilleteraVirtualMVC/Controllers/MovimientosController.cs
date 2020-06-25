@@ -75,13 +75,6 @@ namespace BilleteraVirtualMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //llamar funcion que valide (pasando el id del usuario o el id de cuenta) para obtener el saldo
-                //Objeto SESSION ASP.net
-                //Hacer un if con las validaciones que necesitemos
-                //Db set para hacer las validaciones y posteriormente para actualizar el sueldo en cuentas
-                /*Si hay error: Redirigo a una nueva view con error
-                 * return RedirectToAction(nameof(Index));
-                 * */
                 
                 movimiento.Fecha =DateTime.Now;
                 
