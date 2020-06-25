@@ -60,6 +60,9 @@ namespace BilleteraVirtualMVC.Controllers
         // GET: Movimientos/Create
         public IActionResult Create()
         {
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             return View();
         }
 
