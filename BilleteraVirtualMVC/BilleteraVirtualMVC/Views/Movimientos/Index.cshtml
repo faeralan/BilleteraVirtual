@@ -5,13 +5,34 @@
     ViewData["Title"] = "Movimientos";
 }
 
-<h1>Index</h1>
+<style>
+    .fl-r {
+        float: right !important;
+    }
 
-<p>
-    <a asp-action="Create">Agregar movimiento</a>
-</p>
-<table class="table">
-    <thead>
+    .no-underline {
+        text-decoration: none;
+        color: #000;
+    }
+    .no-underline:hover {
+        text-decoration: none;
+        color: #000;
+    }
+</style>
+
+<div class="row justify-content-between">
+    <div class="col-sm-4">
+        <h1>Index</h1>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" class="btn btn-light fl-r">
+            <a asp-action="Create" class="no-underline">Agregar movimiento</a>
+        </button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Importe)
