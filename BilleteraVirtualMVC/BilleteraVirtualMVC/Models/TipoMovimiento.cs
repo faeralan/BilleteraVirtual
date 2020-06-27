@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BilleteraVirtualMVC.Models
 {
@@ -12,7 +8,5 @@ namespace BilleteraVirtualMVC.Models
         Ingreso=1,
         [Display(Name = "Egreso")]
         Egreso=2
-    }
-
-    
+    }    
 }

@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BilleteraVirtualMVC.Models;
 
 namespace BilleteraVirtualMVC.Context
@@ -18,6 +14,5 @@ namespace BilleteraVirtualMVC.Context
         public DbSet<Movimiento> Movimientos { get; set; }
         
         public DbSet<Cuenta> Cuentas { get; set; }
-
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
@@ -42,6 +39,9 @@ namespace BilleteraVirtualMVC.Controllers
                 return NotFound();
             }
 
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             return View(usuario);
         }
 
@@ -83,6 +83,10 @@ namespace BilleteraVirtualMVC.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             return View(usuario);
         }
 
@@ -93,11 +97,9 @@ namespace BilleteraVirtualMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Nombre,Apellido,Email,Password")] Usuario usuario)
         {
-            /*if (id != usuario.UsuarioId)
-            {
-                return NotFound();
-            }*/
-
+            ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
+            ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
+            ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             if (ModelState.IsValid)
             {
                 try
@@ -115,10 +117,7 @@ namespace BilleteraVirtualMVC.Controllers
                     {
                         throw;
                     }
-                }
-                ViewBag.Nombre = HttpContext.Session.GetString("Nombre");
-                ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
-                ViewBag.Usuario = HttpContext.Session.GetString("UserID");
+                }                
                 return View("~/Views/Home/Index.cshtml");
             }
             return View(usuario);

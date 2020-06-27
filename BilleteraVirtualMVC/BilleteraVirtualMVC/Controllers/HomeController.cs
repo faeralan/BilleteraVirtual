@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BilleteraVirtualMVC.Models;
-using BilleteraVirtualMVC.Context;
 using Microsoft.AspNetCore.Http;
 
 
@@ -19,9 +14,7 @@ namespace BilleteraVirtualMVC.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-        }
-        
-        
+        }                
         public IActionResult Index()
         {
             ViewBag.Nombre = HttpContext.Session.GetString("Nombre");

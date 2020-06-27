@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
 using Microsoft.AspNetCore.Http;
@@ -29,24 +25,23 @@ namespace BilleteraVirtualMVC.Controllers
         [HttpPost, ActionName("Login")]
         [ValidateAntiForgeryToken]
         public IActionResult Login(Usuario user)
-        {
-           
-                using (_context)
+        {           
+            using (_context)
+            {
+                var obj = _context.Usuarios.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
+                if (obj != null)
                 {
-                    var obj = _context.Usuarios.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
-                    if (obj != null)
-                    {
-                        var cons = from us in _context.Usuarios where us.UsuarioId == obj.UsuarioId select us.Cuenta;
-                        var micuenta= cons.FirstOrDefault<Cuenta>();
+                    var cons = from us in _context.Usuarios where us.UsuarioId == obj.UsuarioId select us.Cuenta;
+                    var micuenta= cons.FirstOrDefault<Cuenta>();
 
-                        HttpContext.Session.SetString("UserID", obj.UsuarioId.ToString());
-                        HttpContext.Session.SetInt32("CuentaID", micuenta.CuentaId);
-                        HttpContext.Session.SetString("Nombre", obj.Nombre.ToString());
-                        HttpContext.Session.SetString("Saldo", micuenta.Saldo.ToString());
+                    HttpContext.Session.SetString("UserID", obj.UsuarioId.ToString());
+                    HttpContext.Session.SetInt32("CuentaID", micuenta.CuentaId);
+                    HttpContext.Session.SetString("Nombre", obj.Nombre.ToString());
+                    HttpContext.Session.SetString("Saldo", micuenta.Saldo.ToString());
 
-                        return RedirectToAction("UserDashBoard");
-                    }
+                    return RedirectToAction("UserDashBoard");
                 }
+            }
             
             ModelState.AddModelError("Password", "Los datos ingresados son invalidos");
             return View("~/Views/Login.cshtml");
@@ -68,9 +63,7 @@ namespace BilleteraVirtualMVC.Controllers
         }
 
         public IActionResult CerrarSesion()
-        {
-
-            
+        {            
             HttpContext.Session.SetString("UserID", "");
             HttpContext.Session.SetInt32("CuentaID", 0);
             HttpContext.Session.SetString("Nombre", "");

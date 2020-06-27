@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BilleteraVirtualMVC.Context;
 using BilleteraVirtualMVC.Models;
-using System.Net.WebSockets;
 using Microsoft.AspNetCore.Http;
 
 namespace BilleteraVirtualMVC.Controllers
@@ -29,9 +26,7 @@ namespace BilleteraVirtualMVC.Controllers
             ViewBag.Saldo = HttpContext.Session.GetString("Saldo");
             ViewBag.Usuario = HttpContext.Session.GetString("UserID");
             var movs = from m in _context.Movimientos where m.CuentaId == micuenta orderby m.Fecha select m;
-
             
-
             return View(movs);
         }
 
@@ -74,8 +69,7 @@ namespace BilleteraVirtualMVC.Controllers
         public async Task<IActionResult> Create([Bind("MovimientoId,Importe,Descripcion,TipoMovimiento")] Movimiento movimiento)
         {
             if (ModelState.IsValid)
-            {
-                
+            {                
                 movimiento.Fecha =DateTime.Now;
                 
                 var consulta = _context.Cuentas.Where(s => s.CuentaId == HttpContext.Session.GetInt32("CuentaID"));
@@ -122,9 +116,7 @@ namespace BilleteraVirtualMVC.Controllers
                 }
             }
             return View(movimiento);
-        }
-
-        
+        }       
 
         // GET: Movimientos/Edit/5
         public async Task<IActionResult> Edit(int? id)

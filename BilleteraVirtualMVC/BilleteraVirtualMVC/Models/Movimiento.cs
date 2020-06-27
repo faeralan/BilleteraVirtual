@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Html;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BilleteraVirtualMVC.Models
 {
@@ -30,11 +26,5 @@ namespace BilleteraVirtualMVC.Models
         public TipoMovimiento TipoMovimiento { get; set; }
 
         public int CuentaId { get; set; }
-
-        //Pasar CuentaID en Vista/Controller
-        //Actualizar Saldo en Cuenta
-        //Realizar validaciones (fecha no puede ser mayor a la actual, saldo)
-    }
-
-    
+    }    
 }
